@@ -12,17 +12,17 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $tasks = Task::orderBy('id', 'ASC')->paginate(5);
         return [
-            'paginate' => [
+            'pagination' => [
                 'total' => $tasks->total(),
                 'current_page' => $tasks->currentPage(),
                 'per_page' => $tasks->perPage(),
                 'last_page' => $tasks->lastPage(),
                 'from' => $tasks->firstItem(),
-                'to' => $tasks->lastPage(),
+                'to' => $tasks->lastItem(),
             ],
             'tasks' => $tasks
         ];
